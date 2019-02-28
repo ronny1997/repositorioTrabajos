@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="login"><a>Ayuda </a>
+            <a>Oficinas </a>
+            <a>Cajeros </a>
+            <a>Idiomas</a>
+            <button id="registrar">Registrar</button>
+            <button id="login">Login</button>
+        </div>
+        <div class="header">
+
+            <h2>GoldenBank</h2>
+        </div>
+
+        <div id="navbar">
+            <a class="active" href="javascript:void(0)">Inicio</a>
+            <a href="javascript:void(0)">Cuentas y Tarjetas</a>
+            <a href="javascript:void(0)">Hipotecas y Préstamos</a>
+            <a href="javascript:void(0)">Ahorro e Inversión</a>
+        </div>
+
+        <div class="txt"><div></div>Text</div>
+        <script>
+            window.onscroll = function () {
+                myFunction()
+            };
+
+            var navbar = document.getElementById("navbar");
+            var sticky = navbar.offsetTop;
+
+            function myFunction() {
+                if (window.pageYOffset >= sticky) {
+                    navbar.classList.add("sticky");
+
+                } else {
+                    navbar.classList.remove("sticky");
+                }
+            }
+        </script>
+    </body>
+</html>

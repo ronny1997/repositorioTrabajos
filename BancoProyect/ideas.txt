@@ -1,0 +1,6 @@
+1-Hacer un diseño que al logearse con una cuenta y contraseña nos muestre un menu lateral e el que pondremos las diferentes opciones como abrir cuentas...etc
+2-Usar en la abla de alta de cuenta JSON
+3-Mostrar una ventana de login
+4-Mejorar la vista 
+5-Tratamiento de errores
+6-Poner como php solo los archivos necesarios

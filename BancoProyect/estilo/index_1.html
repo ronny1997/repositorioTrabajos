@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+        <link href="menuLateral.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="login"><a>Ayuda </a>
+            <a>Oficinas </a>
+            <a>Cajeros </a>
+            <a>Idiomas</a>
+            <button id="registrar">Registrar</button>
+            <button id="login">Login</button>
+        </div>
+        <div class="header">
+
+            <h2>GoldenBank</h2>
+        </div>
+
+        <div id="navbar">
+            <a class="active" href="javascript:void(0)">Inicio</a>
+            <a href="javascript:void(0)">Cuentas y Tarjetas</a>
+            <a href="javascript:void(0)">Hipotecas y Préstamos</a>
+            <a href="javascript:void(0)">Ahorro e Inversión</a>
+        </div>
+
+        <div class="sidenav">
+            <a href="#about">Apertura de cuenta</a>
+            <a href="#services">Ingresos</a>
+            <a href="#clients">Movimientos</a>
+            <a href="#contact">Cierre de cuentas</a>
+            
+            <button class="dropdown-btn">Dropdown 
+            </button>
+            <div class="dropdown-container">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+            
+            <a href="#contact">Search</a>
+        </div>
+
+
+
+
+
+        <div class="main"><div></div>Text</div>
+        <script>
+            window.onscroll = function () {
+                myFunction()
+            };
+
+            var navbar = document.getElementById("navbar");
+            var sticky = navbar.offsetTop;
+
+            function myFunction() {
+                if (window.pageYOffset >= sticky) {
+                    navbar.classList.add("sticky");
+
+                } else {
+                    navbar.classList.remove("sticky");
+                }
+            }
+
+
+
+            var dropdown = document.getElementsByClassName("dropdown-btn");
+            var i;
+            for (i = 0; i < dropdown.length; i++) {
+                dropdown[i].addEventListener("click", function () {
+                    this.classList.toggle("activeMD");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            }
+
+
+
+        </script>
+    </body>
+</html>
