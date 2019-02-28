@@ -51,8 +51,5 @@ if (isset($_GET['dniTitular2'])) {
 $saldoCuenta1 = setClienteSaldo($dniTitular, $importe);
 $setNumcuenta1 = setClienteNcuentas($dniTitular);
 $movimiento = nuevoMovimiento($nCuenta, 'nueva cuenta', $importe);
-echo '<script>
-alert("dd");
-</script>';
 $GLOBALS['conexion']->transaccion($insertCuenta, $queriCliente1, $queriCliente2, $saldoCuenta1, $saldoCuenta2, $movimiento, $setNumcuenta2, $setNumcuenta1);
 //

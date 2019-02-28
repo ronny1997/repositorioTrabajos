@@ -116,6 +116,23 @@ class conectaBD {
             echo "Fallo: " . $e->getMessage();
         }
     }
+     public function ingreso($saldoCuenta, $saldoClientes, $movimiento) {
+
+        try {
+   
+            //Saldo
+            $this->db->exec($saldoCuenta);
+            //saldo clientes
+            $this->db->exec($saldoClientes);
+            //grabar movimiento
+            $this->db->exec($movimiento);
+
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            echo "Fallo: " . $e->getMessage();
+        }
+    }
 
 }
 
@@ -211,5 +228,12 @@ function setClienteNcuentas($numDni) {
     $ncuentas = $GLOBALS['conexion']->datoNcuenta($queri);
     $ncuentasActuales = $ncuentas + 1;
     $setNumCuenCli = 'UPDATE clientes SET cl_ncu = ' . $ncuentasActuales . ' WHERE clientes.cl_dni = "' . $numDni . '";';
+    return $setNumCuenCli;
+}
+function ingreso($saldoCuenta, $saldoClientes, $movimiento) {
+    $saldoSql;
+    $saldoClieSql;
+    $moviSql;
+    
     return $setNumCuenCli;
 }
