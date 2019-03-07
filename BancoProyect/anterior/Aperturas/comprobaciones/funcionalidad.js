@@ -261,8 +261,8 @@ function altaCuenta() {
                 $("#resultado").html('<h1>Cargando...</h1><img src="../img/_preloader.gif" alt=""/>');
             },
             success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                alert('Cuenta creada correctamente');
-                $("#resultado").html('OK');
+
+                $("#resultado").html(response);
 
             }
         });

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+         
+        <link href="css/cssLess.less" rel="stylesheet/less" type="text/css"/>
+       <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js" ></script>
+        
+    </head>
+    <body>
+        <div class="login"><a>Ayuda </a>
+            <a>Oficinas </a>
+            <a>Cajeros </a>
+            <a>Idiomas</a>
+            <button id="registrar">Registrar</button>
+            <button id="login">Login</button>
+        </div>
+        <div class="header">
+
+            <h2>GoldenBank</h2>
+        </div>
+
+        <div id="navbar">
+            <a class="active" href="javascript:void(0)">Inicio</a>
+            <a href="javascript:void(0)">Cuentas y Tarjetas</a>
+            <a href="javascript:void(0)">Hipotecas y Préstamos</a>
+            <a href="javascript:void(0)">Ahorro e Inversión</a>
+        </div>
+
+        <div class="txt">
+            <div class="presentacion">
+         
+                <div ><h2> <a href="movimientos/index_1.html">Movimientos</a></h2></div>
+                <div ><h2> <a href="Aperturas/index_1.html">Apertura de cuentas</a></h2></div>
+                <div ><h2><a href="IngresosReintegros/index_1.html">Ingresos</a></h2></div>
+            </div>
+
+        </div>
+        <script>
+            window.onscroll = function () {
+                myFunction()
+            };
+
+            var navbar = document.getElementById("navbar");
+            var sticky = navbar.offsetTop;
+
+            function myFunction() {
+                if (window.pageYOffset >= sticky) {
+                    navbar.classList.add("sticky");
+
+                } else {
+                    navbar.classList.remove("sticky");
+                }
+            }
+        </script>
+    </body>
+</html>

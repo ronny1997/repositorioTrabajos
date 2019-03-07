@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link href="../css/menuLateral.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
+        <script src="comprobaciones/funcionalidad.js" type="text/javascript"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="login"><a>Ayuda </a>
+            <a>Oficinas </a>
+            <a>Cajeros </a>
+            <a>Idiomas</a>
+            <button id="registrar">Registrar</button>
+            <button id="login">Login</button>
+        </div>
+        <div class="header">
+
+            <h2>GoldenBank</h2>
+        </div>
+
+        <div id="navbar">
+            <a class="active" href="javascript:void(0)">Inicio</a>
+            <a href="javascript:void(0)">Cuentas y Tarjetas</a>
+            <a href="javascript:void(0)">Hipotecas y Préstamos</a>
+            <a href="javascript:void(0)">Ahorro e Inversión</a>
+        </div>
+
+        <div class="sidenav">
+            <a href="../Aperturas/index_1.html">Apertura de cuenta</a>
+            <a href="../IngresosReintegros/index_1.html">Ingresos</a>
+            <a href="../movimientos/index_1.html">Movimientos</a>
+            <a href="#contact">Cierre de cuentas</a>
+
+            <button class="dropdown-btn">Dropdown 
+            </button>
+            <div class="dropdown-container">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+
+            <a href="#contact">Search</a>
+        </div>
+
+
+
+
+
+        <div class="main">
+            <div class="form">
+                <div class="caminoMiga">Incio/Apertura de cuenta</div>
+                <h2>Apertura de cuenta</h2>
+                <div id="tabla">
+                </div>
+                <div id="tabla2">
+                </div>
+                <form  method="POST" name="form" id="form">   
+                    <span id="resultado">
+                        Numero de cuenta: <input onclick="efecto(this)" type = "text" name="nCuenta"  onBlur="comprobarNcuenta(this)"> <a id="demo"></a>
+                        DNI del primer tirular <input onclick="efecto(this)" type = "text" name="dniTitular">
+                        <input onclick="dniUno()" type="button" value="aceptar" name="aceptar">
+                        <br />
+                    </span>
+                    <span id="resultado5"></span>
+                </form> 
+            </div>
+        </div>
+
+    </body>
+</html>
