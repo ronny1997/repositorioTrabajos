@@ -9,6 +9,7 @@ and open the template in the editor.
 */
 
 @colorFondo: #EABE3F; 
+@font:15px;
 body {
     margin: 0;
     font-size: 28px;
@@ -28,21 +29,27 @@ body {
     color: white;
     width: 100%;
    float: left;
-   font-size: 15px;
+   font-size: @font;
 }
 .login button{
     border: 0px;
     height: 30px;
    float: right;
-   font-size: 15px;
+   font-size: @font;
 }
+
+
 #login{
-    background-color: black;
-    color: @colorFondo;
+    .boton(@colorFon:black, @color:@colorFondo);
 }
 #registrar{
-    background-color: #EABE3F;
-    color: white;
+    .boton(@colorFon:#EABE3F, @color:white);
+}
+
+.boton(@colorFon:#ddd, @color:#000){
+    background-color: @colorFon;
+    color: @color;
+    border: 0px;
 }
 
 #navbar {
@@ -58,7 +65,7 @@ body {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: @font+2;
 }
 
 #navbar a:hover {
