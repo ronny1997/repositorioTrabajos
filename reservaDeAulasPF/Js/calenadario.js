@@ -9,36 +9,39 @@ window.onload = function () {
 
 
 
-    var fecha = new Date(2014, 5, 1);
-    alert(fecha.getDay());
 
-    switch (fecha.getDay()) {
-        case 0:
-            DialDelMesEmpiesa = 7;
-            break;
-        case 1:
-            DialDelMesEmpiesa = 1;
-            break;
-        case 2:
-            DialDelMesEmpiesa = 2;
-            break;
-        case 3:
-            DialDelMesEmpiesa = 3;
-            break;
-        case 4:
-            DialDelMesEmpiesa = 4;
-            break;
-        case 5:
-            DialDelMesEmpiesa = 5;
-            break;
-        case 6:
-            DialDelMesEmpiesa = 6;
-            break;
-    }
     for (var i = 0; i < arrayMeses.length; i++) {
-        crearMes(arrayMeses[i], DialDelMesEmpiesa, 31);
+        fecha_año = new Date();
+        año = fecha_año.getFullYear();
+        var fecha = new Date(año, i, 1);
+        var fecha_2 = new Date(año, i, 0);
+        num_dias_mes = fecha_2.getDate();
+        switch (fecha.getDay()) {
+            case 0:
+                DialDelMesEmpiesa = 7;
+                break;
+            case 1:
+                DialDelMesEmpiesa = 1;
+                break;
+            case 2:
+                DialDelMesEmpiesa = 2;
+                break;
+            case 3:
+                DialDelMesEmpiesa = 3;
+                break;
+            case 4:
+                DialDelMesEmpiesa = 4;
+                break;
+            case 5:
+                DialDelMesEmpiesa = 5;
+                break;
+            case 6:
+                DialDelMesEmpiesa = 6;
+                break;
+        }
+        crearMes(arrayMeses[i], DialDelMesEmpiesa, num_dias_mes);
     }
-    
+
 
 
 };
@@ -49,6 +52,10 @@ function crearMes(mes, DialDelMesEmpiesa, numDiasDelMes) {
     mi_etiqueta_table.setAttribute('id', mes);
     document.body.appendChild(mi_etiqueta_table);
     var mi_etiqueta_tr = document.createElement("tr");
+    var mi_etiqueta_caption = document.createElement("caption");
+    mes = document.createTextNode(mes);
+    mi_etiqueta_caption.appendChild(mes);
+    mi_etiqueta_table.appendChild(mi_etiqueta_caption);
     //----TH-----
     for (var i = 0; i < arrayDias.length; i++) {
         var mi_etiqueta_th = document.createElement("th");
@@ -56,14 +63,14 @@ function crearMes(mes, DialDelMesEmpiesa, numDiasDelMes) {
         mi_etiqueta_th.appendChild(dia);
         mi_etiqueta_tr.appendChild(mi_etiqueta_th);
     }
-    document.getElementById(mes).appendChild(mi_etiqueta_tr);
+    mi_etiqueta_table.appendChild(mi_etiqueta_tr);
     contador2 = 1;
     contador = 1;
     for (var e = 1; contador <= numDiasDelMes; e++) {
         //TR 
         var mi_etiqueta_tr = document.createElement("tr");
-        document.getElementById(mes).appendChild(mi_etiqueta_tr);
-        var tr = document.getElementById(mes).getElementsByTagName("tr")[e];
+         mi_etiqueta_table.appendChild(mi_etiqueta_tr);
+        var tr =  mi_etiqueta_table.getElementsByTagName("tr")[e];
         for (var i = 1; i <= 7; i++) {
             //CREO TD
             var mi_etiqueta_td = document.createElement("td");

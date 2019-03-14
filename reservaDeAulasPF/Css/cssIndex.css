@@ -10,4 +10,9 @@ and open the template in the editor.
 
 table{
     border: solid;
+    width: 600px;
+    height: 600px;
+}
+td{
+    border: solid;
 }
