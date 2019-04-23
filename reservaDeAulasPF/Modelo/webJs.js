@@ -7,9 +7,6 @@
 window.onload = function () {
     var arrayMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-
-
-
     for (var i = 0; i < arrayMeses.length; i++) {
         fecha_año = new Date();
         año = fecha_año.getFullYear();
@@ -39,12 +36,25 @@ window.onload = function () {
                 DialDelMesEmpiesa = 6;
                 break;
         }
-        crearMes(arrayMeses[i], DialDelMesEmpiesa, num_dias_mes);
+        calendario = new Calendario(arrayMeses[i], DialDelMesEmpiesa, num_dias_mes);
+        calendario.crearMes();
     }
 
 
 
 };
+
+
+
+
+
+
+
+
+
+
+
+
 function crearMes(mes, DialDelMesEmpiesa, numDiasDelMes) {
     var arrayDias = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
 
