@@ -16,3 +16,10 @@ table{
 td{
     border: solid;
 }
+/*Esta parte del css corresponde a los efectos de boton del calendario*/
+.pulsar{
+    border: solid;
+}
+.pulsar:hover{
+    background-color: blue;
+}

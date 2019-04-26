@@ -3,98 +3,107 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+var mes_actual;
 window.onload = function () {
-    var arrayMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-
-    for (var i = 0; i < arrayMeses.length; i++) {
-        fecha_año = new Date();
-        año = fecha_año.getFullYear();
-        var fecha = new Date(año, i, 1);
-        var fecha_2 = new Date(año, i, 0);
-        num_dias_mes = fecha_2.getDate();
-        switch (fecha.getDay()) {
-            case 0:
-                DialDelMesEmpiesa = 7;
-                break;
-            case 1:
-                DialDelMesEmpiesa = 1;
-                break;
-            case 2:
-                DialDelMesEmpiesa = 2;
-                break;
-            case 3:
-                DialDelMesEmpiesa = 3;
-                break;
-            case 4:
-                DialDelMesEmpiesa = 4;
-                break;
-            case 5:
-                DialDelMesEmpiesa = 5;
-                break;
-            case 6:
-                DialDelMesEmpiesa = 6;
-                break;
-        }
-        calendario = new Calendario(arrayMeses[i], DialDelMesEmpiesa, num_dias_mes);
-        calendario.crearMes();
-    }
-
+    var fecha_mes = new Date();
+    var mes = fecha_mes.getMonth();
+    imprimirMes(mes);
+    mes_actual = mes;
 
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-function crearMes(mes, DialDelMesEmpiesa, numDiasDelMes) {
-    var arrayDias = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
-
-    var mi_etiqueta_table = document.createElement("table");
-    mi_etiqueta_table.setAttribute('id', mes);
-    document.body.appendChild(mi_etiqueta_table);
-    var mi_etiqueta_tr = document.createElement("tr");
-    var mi_etiqueta_caption = document.createElement("caption");
-    mes = document.createTextNode(mes);
-    mi_etiqueta_caption.appendChild(mes);
-    mi_etiqueta_table.appendChild(mi_etiqueta_caption);
-    //----TH-----
-    for (var i = 0; i < arrayDias.length; i++) {
-        var mi_etiqueta_th = document.createElement("th");
-        dia = document.createTextNode(arrayDias[i]);
-        mi_etiqueta_th.appendChild(dia);
-        mi_etiqueta_tr.appendChild(mi_etiqueta_th);
-    }
-    mi_etiqueta_table.appendChild(mi_etiqueta_tr);
-    contador2 = 1;
-    contador = 1;
-    for (var e = 1; contador <= numDiasDelMes; e++) {
-        //TR 
-        var mi_etiqueta_tr = document.createElement("tr");
-         mi_etiqueta_table.appendChild(mi_etiqueta_tr);
-        var tr =  mi_etiqueta_table.getElementsByTagName("tr")[e];
-        for (var i = 1; i <= 7; i++) {
-            //CREO TD
-            var mi_etiqueta_td = document.createElement("td");
-            if (contador2 >= DialDelMesEmpiesa) {
-                //USO UN CONTOR PARA PODER COGER UNO A UNO LOS ELEMENTOS DEL TD
-                if (contador <= numDiasDelMes) {
-                    var mi_texto = document.createTextNode(contador);
-                    mi_etiqueta_td.appendChild(mi_texto);
-                }
-                contador++;
-            }
-            tr.appendChild(mi_etiqueta_td);
-            contador2++;
-
-        }
-    }
+function menosMes() {
+    mes_actual--;
+    var mes = mes_actual;
+    imprimirMes(mes);
+    mes_actual = mes;
 }
+function masMes() {
+    mes_actual++;
+    var mes = mes_actual;
+    imprimirMes(mes);
+    mes_actual = mes;
+}
+
+function imprimirMes(mes) {
+    var arrayMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+
+    fecha_año = new Date();
+    año = fecha_año.getFullYear();
+
+    var fecha = new Date(año, mes, 1);
+    //pillo el ultimo dia del mes anterior, cogiendo asi cuantos dias tiene el mes
+    var fecha_2 = new Date(año, mes + 1, 0);
+    num_dias_mes = fecha_2.getDate();
+    switch (fecha.getDay()) {
+        case 0:
+            DialDelMesEmpiesa = 7;
+            break;
+        case 1:
+            DialDelMesEmpiesa = 1;
+            break;
+        case 2:
+            DialDelMesEmpiesa = 2;
+            break;
+        case 3:
+            DialDelMesEmpiesa = 3;
+            break;
+        case 4:
+            DialDelMesEmpiesa = 4;
+            break;
+        case 5:
+            DialDelMesEmpiesa = 5;
+            break;
+        case 6:
+            DialDelMesEmpiesa = 6;
+            break;
+    }
+    var calendario = new Calendario(arrayMeses[mes], DialDelMesEmpiesa, num_dias_mes);
+    calendario.crearMes();
+}
+
+function seleccionado(dia, mes) {
+    alert("seleccionado" + dia + mes.id);
+    var num_mes = getMes(mes.id);
+    var fecha_seleccionada = new Date();
+    fecha_seleccionada.setMonth(num_mes);
+    fecha_seleccionada.setDate(dia);
+    fecha_seleccionada;
+}
+
+function  getMes(mes) {
+    switch (mes) {
+        case "Enero":
+            MesIs = 0;
+            break;
+        case "Febrero":
+            MesIs = 1;
+            break;
+        case "Marzo":
+            MesIs = 2;
+            break;
+        case "Abril":
+            MesIs = 3;
+            break;
+        case "Enero":
+            MesIs = 4;
+            break;
+        case "Enero":
+            MesIs = 1;
+            break;
+        case "Enero":
+            MesIs = 1;
+            break;
+        case "Enero":
+            MesIs = 1;
+            break;
+        case "Enero":
+            MesIs = 1;
+            break;
+    }
+    return MesIs;
+}
+
+
+
