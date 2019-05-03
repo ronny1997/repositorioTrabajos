@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 var mes_actual;
+var hour = 8;
+var min = 30;
+var reserva;//objeto reserva
 window.onload = function () {
     var fecha_mes = new Date();
     var mes = fecha_mes.getMonth();
@@ -24,7 +27,7 @@ function masMes() {
     imprimirMes(mes);
     mes_actual = mes;
 }
-
+//Colocar esto, dentro del funcionamiento interno del objeto calendario
 function imprimirMes(mes) {
     var arrayMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
@@ -63,16 +66,17 @@ function imprimirMes(mes) {
     calendario.crearMes();
 }
 
-function seleccionado(dia, mes) {
-    alert("seleccionado" + dia + mes.id);
-    var num_mes = getMes(mes.id);
+function selectMes(dia, mes) {
+    var num_mes = numMes(mes.id);
     var fecha_seleccionada = new Date();
     fecha_seleccionada.setMonth(num_mes);
     fecha_seleccionada.setDate(dia);
     fecha_seleccionada;
+    printHour(dia+" de "+mes.id);
 }
+function selectHour(){}
 
-function  getMes(mes) {
+function numMes(mes) {
     switch (mes) {
         case "Enero":
             MesIs = 0;
@@ -86,20 +90,29 @@ function  getMes(mes) {
         case "Abril":
             MesIs = 3;
             break;
-        case "Enero":
+        case "Mayo":
             MesIs = 4;
             break;
-        case "Enero":
-            MesIs = 1;
+        case "Junio":
+            MesIs = 5;
             break;
-        case "Enero":
-            MesIs = 1;
+        case "Julio":
+            MesIs = 6;
             break;
-        case "Enero":
-            MesIs = 1;
+        case "Agosto":
+            MesIs = 7;
             break;
-        case "Enero":
-            MesIs = 1;
+        case "Septiembre":
+            MesIs = 8;
+            break;
+        case "Octubre":
+            MesIs = 9;
+            break;
+        case "Noviembre":
+            MesIs = 10;
+            break;
+        case "Diciembre":
+            MesIs = 11;
             break;
     }
     return MesIs;
