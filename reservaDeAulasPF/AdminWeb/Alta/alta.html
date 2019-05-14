@@ -11,7 +11,6 @@ and open the template in the editor.
         <link href="../Css/re_al_alta_css.css" rel="stylesheet" type="text/css"/>
         <script src="../Js/re_au_jsAlta.js" type="text/javascript"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
     </head>
     <body>
         <table>
@@ -32,17 +31,17 @@ and open the template in the editor.
                 </td>
             </tr>
         </table>
-        <form id="res_au_formulario_alta">
+        <form id="res_au_formulario_alta" action="../php/phpBDD.php" method="get">
             Nombre: 
-            <input type="text" name="Nombre">
+            <input type="text" name="nombre">
             Tipo: 
-            <select name="Tipo">
+            <select name="tipo">
                 <option value="aula">Aula</option>
                 <option value="equipo">Equipo</option>
             </select><br>
             Descripción:<br>
             <textarea name="descriptiom" form="res_au_formulario_alta"></textarea>
-            <br> <input type="submit" value="Submit">
+            <br> <input type="submit" value="submit">
         </form>
     </body>
 </html>
