@@ -32,10 +32,8 @@ class Element {
 
     public function insertElement() {
         //protegerse de sql inyection
-
-//        $sql = 'INSERT INTO elementos ( name, hour_ini, hour_fin, type, description)'
-//                . ' VALUES ("' . $this->name . '", null, null, "' . $this->type . '","' . $this->description . '")';
-         $sql ='INSERT INTO elementos ( name, hour_ini, hour_fin, type, description) VALUES ("ddddd", null, null, "dddd","dddd")';
+        $sql = 'INSERT INTO elementos ( name, hour_ini, hour_fin, type, description)'
+                . ' VALUES ("' . $this->name . '", null, null, "' . $this->type . '","' . $this->description . '")';
         $this->bd->insert($sql);
     }
 

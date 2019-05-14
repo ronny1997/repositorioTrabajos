@@ -24,11 +24,11 @@ class conectaBD {
 
     public function select($sql) {
         $filas[] = array();
-        $consulta = $this->db->prepare($sql);
-        $consulta->setFetchMode(PDO::FETCH_ASSOC);
-        $consulta->execute();
-        if ($consulta->rowCount() > 0) {
-            while ($row = $consulta->fetch()) {
+        $this->db->prepare($sql);
+        $this->db->etFetchMode(PDO::FETCH_ASSOC);
+        $this->db->execute();
+        if ($this->db->rowCount() > 0) {
+            while ($row = $this->db->fetch()) {
                 $filas[] = $row;
             }
         }
@@ -48,21 +48,21 @@ class conectaBD {
 
     public function delete($sql) {
         // set the PDO error mode to exception
-        $conn = $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $conn->exec($sql);
+        $this->db->exec($sql);
         echo "Record deleted successfully";
     }
 
     public function update($sql) {
-        $conn = $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Prepare statement
-        $stmt = $conn->prepare($sql);
+        $this->db->prepare($sql);
         // execute the query
-        $stmt->execute();
+        $this->db->execute();
         // echo a message to say the UPDATE succeeded
-        echo $stmt->rowCount() . " records UPDATED successfully";
+        echo $this->db->rowCount() . " records UPDATED successfully";
     }
 
 }
