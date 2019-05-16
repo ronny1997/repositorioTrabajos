@@ -37,11 +37,11 @@ class conectaBD {
 
     public function insert($sql) {
         try {
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo $sql;
-        $this->db->exec($sql);
-        echo "New record created successfully";
-        } catch(PDOException $e) {
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo $sql;
+            $this->db->exec($sql);
+            echo "New record created successfully";
+        } catch (PDOException $e) {
             echo $sql . "<br>" . $e->getMessage();
         }
     }
@@ -68,3 +68,30 @@ class conectaBD {
 }
 
 //INSERT INTO elementos ( name, hour_ini, hour_fin, type, description) VALUES ("ddddd", null, null, "dddd","dddd")
+/*
+ * 
+ CREATE TABLE `elementos` (
+  `id` int(11) NOT NULL  AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (ID)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `reserva` (
+  `id` int(20) NOT NULL  AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `fecha` date NOT NULL,
+  `hour_ini` date NOT NULL,
+  `hour_fin` date NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `id_elementos` int(20) NOT NULL,
+   PRIMARY KEY (id),
+    FOREIGN KEY (id_elementos) REFERENCES elementos(id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ * 
+ * 
+ * 
+ */
