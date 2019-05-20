@@ -18,14 +18,14 @@ function aceptar() {
         "elemenJsonInsert": elemenJson
     };
     $.ajax({
-        data: parametro, //datos que se envian a traves de ajax
-        url: '../php/phpBDD.php', //archivo que recibe la peticion
-        type: 'GET', //método de envio
+        data: parametro,
+        url: '../php/phpBDD.php',
+        type: 'GET',
         //dataType: "json",
         beforeSend: function () {
             $("#res_au_button").html('<h1>Cargando...</h1>');
         },
-        success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+        success: function (response) { 
              $("#res_au_button").html(response);
         }
     });
