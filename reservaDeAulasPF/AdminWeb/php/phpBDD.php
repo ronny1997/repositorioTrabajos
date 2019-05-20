@@ -6,14 +6,15 @@
  * and open the template in the editor.
  */
 include_once '../objects/elementos.php';
-$nombre = $_GET['nombre'];
-$tipo = $_GET['tipo'];
-$descriptiom = $_GET['descriptiom'];
 
 
+if(isset($_GET['elemenJsonInsert'])){
+   $elemenJson = $_GET['elemenJsonInsert'];
+$element = json_decode($elemenJson);
+$elemento = new Element($element->nombreElemento,$element->tipoElemento,$element->descriptionElemento);
+$elemento->insertElement(); 
+}
 
-$elemento = new Element($nombre,$tipo,$descriptiom);
-$elemento->insertElement();
 
 //hacer un objeto al que le pueda enchufar los campos anteriores los campos de la fecha son null 
 

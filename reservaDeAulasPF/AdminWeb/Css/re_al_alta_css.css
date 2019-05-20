@@ -7,17 +7,9 @@ and open the template in the editor.
     Created on : 06-may-2019, 20:05:50
     Author     : nestorallaucapardo
 */
-table{
-     width: 600px;
-    border: solid;
-    margin: auto;
-}
-table td{
-    border: solid;
-}
-form{
-    width: 600px;
-    height: 200px;
-    border: solid;
+
+.res_au_altaStyle{
+    width: 400px;
+    border: solid black;
     margin: auto;
 }

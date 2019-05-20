@@ -11,16 +11,12 @@ class Element {
 
     private $bd;
     public $name;
-    public $hour_ini;
-    public $hour_fin;
     public $type;
     public $description;
 
-    public function __construct($name, $type, $description, $hour_ini = null, $hour_fin = null) {
+    public function __construct($name, $type, $description) {
         $this->name = $name;
         $this->type = $type;
-        $this->hour_ini = $hour_ini;
-        $this->hour_fin = $hour_fin;
         $this->description = $description;
         $this->bd = new conectaBD();
     }
@@ -29,14 +25,20 @@ class Element {
     public function getName() {
         return;
     }
-
-    public function insertElement() {
+    public function insertElementBdd() {
         //protegerse de sql inyection
-        $sql = 'INSERT INTO elementos ( name, hour_ini, hour_fin, type, description)'
-                . ' VALUES ("' . $this->name . '", null, null, "' . $this->type . '","' . $this->description . '")';
+        $sql = 'INSERT INTO elementos ( name, type, description)'
+                . ' VALUES ("' . $this->name . '","' . $this->type . '","' . $this->description . '")';
         $this->bd->insert($sql);
     }
+     public function datasElementBdd() {
+        //protegerse de sql inyection
+        $sql = 'select * from elementos';
+        $this->bd->select($sql);
+    }
+    
 
 }
 
 //INSERT INTO elementos ( name, hour_ini, hour_fin, type, description) VALUES ("ddddd", null, null, "dddd","dddd")
+// ver como se llama esto para las conexion y la optencion de datos
