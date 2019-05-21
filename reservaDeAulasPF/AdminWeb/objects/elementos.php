@@ -7,36 +7,26 @@
  */
 include '../../bdd/conexionBdd.php';
 
-class Element {
+class ElementBD {
 
     private $bd;
-    public $name;
-    public $type;
-    public $description;
 
-    public function __construct($name, $type, $description) {
-        $this->name = $name;
-        $this->type = $type;
-        $this->description = $description;
+    public function __construct() {
         $this->bd = new conectaBD();
     }
 
-// no se si me hace fata aun
-    public function getName() {
-        return;
-    }
-    public function insertElementBdd() {
+    public function insertElementBdd($name, $type, $description) {
         //protegerse de sql inyection
         $sql = 'INSERT INTO elementos ( name, type, description)'
-                . ' VALUES ("' . $this->name . '","' . $this->type . '","' . $this->description . '")';
+                . ' VALUES ("' . $name . '","' . $type . '","' . $description . '")';
         $this->bd->insert($sql);
     }
-     public function datasElementBdd() {
+
+    public function datasElementBdd() {
         //protegerse de sql inyection
-        $sql = 'select * from elementos';
-        $this->bd->select($sql);
+        $sql = 'SELECT * FROM `elementos`';
+        return $this->bd->select($sql);
     }
-    
 
 }
 

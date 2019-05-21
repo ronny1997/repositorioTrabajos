@@ -23,16 +23,16 @@ class conectaBD {
     }
 
     public function select($sql) {
-        $filas[] = array();
-        $this->db->prepare($sql);
-        $this->db->etFetchMode(PDO::FETCH_ASSOC);
-        $this->db->execute();
-        if ($this->db->rowCount() > 0) {
-            while ($row = $this->db->fetch()) {
-                $filas[] = $row;
+        $filas = array();
+        $consulta = $this->db->prepare($sql);
+        $consulta->setFetchMode(PDO::FETCH_ASSOC);
+        $consulta->execute();
+        if ($consulta->rowCount() > 0) {
+            while ($row = $consulta->fetch()) {
+                 $filas[] = $row;
             }
         }
-        return $filas;
+     return $filas;
     }
 
     public function insert($sql) {

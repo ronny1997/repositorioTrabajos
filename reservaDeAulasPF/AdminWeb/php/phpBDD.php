@@ -9,12 +9,16 @@ include_once '../objects/elementos.php';
 
 
 if(isset($_GET['elemenJsonInsert'])){
-   $elemenJson = $_GET['elemenJsonInsert'];
+
+$elemenJson = $_GET['elemenJsonInsert'];
 $element = json_decode($elemenJson);
-$elemento = new Element($element->nombreElemento,$element->tipoElemento,$element->descriptionElemento);
-$elemento->insertElement(); 
+$elemento = new ElementBD();
+$elemento->insertElementBdd($element->nombreElemento,$element->tipoElemento,$element->descriptionElemento); 
 }
 
-
-//hacer un objeto al que le pueda enchufar los campos anteriores los campos de la fecha son null 
-
+if(isset($_GET['data'])){
+    $elemento = new ElementBD();
+    $arrayElement = $elemento ->datasElementBdd();
+    //print_r($arrayElement);
+    echo json_encode($arrayElement, JSON_OBJECT_AS_ARRAY);
+}
