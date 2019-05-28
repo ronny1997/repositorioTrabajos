@@ -7,11 +7,6 @@ and open the template in the editor.
     Created on : 03-may-2019, 18:51:19
     Author     : nestorallaucapardo
 */
-
-
-.menuAdmin{
-  
-}
 .divMenu{
     margin: 20px;
      float: left;
@@ -21,4 +16,10 @@ and open the template in the editor.
 }
 .divMenu:hover{
    background-color: red;
+}
+.pulsar{
+    border: solid;
+}
+.pulsar:hover{
+    background-color: blue;
 }

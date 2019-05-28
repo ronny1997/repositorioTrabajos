@@ -17,15 +17,11 @@ window.onload = function () {
 };
 function menosMes() {
     mes_actual--;
-    var mes = mes_actual;
-    imprimirMes(mes);
-    mes_actual = mes;
+    imprimirMes(mes_actual);
 }
 function masMes() {
     mes_actual++;
-    var mes = mes_actual;
-    imprimirMes(mes);
-    mes_actual = mes;
+    imprimirMes(mes_actual);
 }
 //Colocar esto, dentro del funcionamiento interno del objeto calendario
 function imprimirMes(mes) {
@@ -74,7 +70,9 @@ function selectMes(dia, mes) {
     fecha_seleccionada;
     printHour(dia+" de "+mes.id);
 }
-function selectHour(){}
+function selectHour(){
+    
+}
 
 function numMes(mes) {
     switch (mes) {

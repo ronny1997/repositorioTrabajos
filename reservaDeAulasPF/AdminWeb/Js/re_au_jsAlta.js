@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 var response;
+var id_select;
 window.onload = function() {
 responce();
 };
@@ -23,7 +24,7 @@ function aceptar() {
     };
     $.ajax({
         data: parametro,
-        url: '../php/phpBDD.php',
+        url: 'php/phpBDD.php',
         type: 'GET',
         //dataType: "json",
         beforeSend: function () {
@@ -31,13 +32,57 @@ function aceptar() {
         },
         success: function (responseInsert) {
             $("#res_au_button").html(responseInsert);
+            responce();
         }
     });
 
-
 }
-function eliminar() {}
-function modificar() {}
+function eliminar() {
+       var parametro = {
+        "deleteData": response[id_select]["id"]
+    };
+    $.ajax({
+        data: parametro, //datos que se envian a traves de ajax
+        url: 'php/phpBDD.php', //archivo que recibe la peticion
+        type: 'GET', //método de envio
+        //dataType: "json",
+        beforeSend: function () {
+            $("#res_au_button").html('<h1>Cargando...</h1>');
+        },
+        success: function (responceDelete) {
+                $("#res_au_button").html(responceDelete);
+                responce();
+        }
+    });
+}
+function modificar() {
+       var nombreElemento = document.res_au_formulario_admin.nombre.value;
+    var tipoElemento = document.res_au_formulario_admin.tipo.value;
+    var descriptiom = document.getElementById("textArea_form").value;
+    var elemento = {
+        id: response[id_select]["id"],
+        nombreElemento: nombreElemento,
+        tipoElemento: tipoElemento,
+        descriptionElemento: descriptiom
+    };
+    var elemenJson = JSON.stringify(elemento);
+    var parametro = {
+        "elemenJsonUpdate": elemenJson
+    };
+    $.ajax({
+        data: parametro,
+        url: 'php/phpBDD.php',
+        type: 'GET',
+        //dataType: "json",
+        beforeSend: function () {
+            $("#res_au_button").html('<h1>Cargando...</h1>');
+        },
+        success: function (responseInsert) {
+            $("#res_au_button").html(responseInsert);
+            responce();
+        }
+    });
+}
 //activar json y ver q sale
 function responce() {
     var parametro = {
@@ -45,7 +90,7 @@ function responce() {
     };
     $.ajax({
         data: parametro, //datos que se envian a traves de ajax
-        url: '../php/phpBDD.php', //archivo que recibe la peticion
+        url: 'php/phpBDD.php', //archivo que recibe la peticion
         type: 'GET', //método de envio
         //dataType: "json",
         beforeSend: function () {
@@ -60,9 +105,7 @@ function responce() {
 function crearTabla(idTablaconte, idTabla, caption) {
     document.getElementById(idTablaconte).innerHTML = "";
     var mi_etiqueta_table = document.createElement("table");
-    var id = document.createAttribute("id");
-    id.value = idTabla;
-    mi_etiqueta_table.setAttributeNode(id);
+     mi_etiqueta_table.setAttribute("id","idTabla");
     document.getElementById(idTablaconte).appendChild(mi_etiqueta_table);
     captio = document.createElement("caption");
     var Caption = document.createTextNode(caption);
@@ -81,6 +124,7 @@ function crearTabla(idTablaconte, idTabla, caption) {
     
     for (var dentro in response) {
         var mi_etiqueta_tr = document.createElement("tr");
+        mi_etiqueta_tr.setAttribute("class","pulsar");
         for (var den in  response[dentro]) {
             var data = document.createTextNode(response[dentro][den]);
             var mi_etiqueta_td = document.createElement("td");
@@ -95,8 +139,8 @@ function crearTabla(idTablaconte, idTabla, caption) {
 
 }
 function funciona(selec) {
-    alert(response[0]["id"]);
-    
+    alert(response[selec]["id"]);
+    id_select = selec;
     document.res_au_formulario_admin.nombre.value = response[selec]["name"];
      document.res_au_formulario_admin.tipo.value = response[selec]["type"];
     document.getElementById("textArea_form").value = response[selec]["description"];

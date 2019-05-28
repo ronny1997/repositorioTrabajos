@@ -29,10 +29,10 @@ class conectaBD {
         $consulta->execute();
         if ($consulta->rowCount() > 0) {
             while ($row = $consulta->fetch()) {
-                 $filas[] = $row;
+                $filas[] = $row;
             }
         }
-     return $filas;
+        return $filas;
     }
 
     public function insert($sql) {
@@ -45,23 +45,33 @@ class conectaBD {
         }
     }
 
-    public function delete($sql) {
-        // set the PDO error mode to exception
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    public function delete($sql, $sqlSimple) {
+        try {
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $this->db->exec($sql);
-        echo "Record deleted successfully";
+            $consulta = $this->db->prepare($sql);
+            $consulta->execute();
+            if ($consulta->rowCount() == 0) {
+                $this->db->exec($sqlSimple);
+            }
+            echo 'OK';
+        } catch (PDOException $e) {
+            echo $sql . "<br>" . $e->getMessage();
+        }
     }
 
     public function update($sql) {
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        // Prepare statement
-        $this->db->prepare($sql);
-        // execute the query
-        $this->db->execute();
-        // echo a message to say the UPDATE succeeded
-        echo $this->db->rowCount() . " records UPDATED successfully";
+        try {
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // Prepare statement
+            $consulta = $this->db->prepare($sql);
+            // execute the query
+            $consulta->execute();
+            // echo a message to say the UPDATE succeeded
+            echo 'OK';
+        } catch (PDOException $e) {
+            echo $sql . "<br>" . $e->getMessage();
+        }
     }
 
 }
