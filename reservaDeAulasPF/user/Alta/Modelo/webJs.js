@@ -6,6 +6,10 @@
 var mes_actual;
 var hour = 8;
 var min = 30;
+
+var houIniSegundoTurno = 15;
+var hourFinSegundoTurno = 30;
+
 var reserva;//objeto reserva
 window.onload = function () {
     var fecha_mes = new Date();
@@ -68,10 +72,20 @@ function selectMes(dia, mes) {
     fecha_seleccionada.setMonth(num_mes);
     fecha_seleccionada.setDate(dia);
     fecha_seleccionada;
-    printHour(dia+" de "+mes.id);
+    printHour("Turno de mañanan " + dia + " de " + mes.id);
+    hour = 15;
+    min = 30;
+    printHour("Turno de tarde " + dia + " de " + mes.id);
+
+
 }
-function selectHour(){
-    
+function selectHour(horaTer, minTer, hourIni, minIni) {
+    alert(hourIni + ":" + minIni + ", " + horaTer + ":" + minTer);
+
+       
+            $("#box").slideToggle();
+        
+
 }
 
 function numMes(mes) {
@@ -115,6 +129,17 @@ function numMes(mes) {
     }
     return MesIs;
 }
+
+//$(document).ready(function () {
+//    $("#button").click(function () {
+//        if ($(this).html() == "-") {
+//            $(this).html("+");
+//        } else {
+//            $(this).html("-");
+//        }
+//        $("#box").slideToggle();
+//    });
+//});
 
 
 

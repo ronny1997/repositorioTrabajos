@@ -64,51 +64,59 @@ function Calendario(mes, dia_mes_empiesa, num_dias) {
 
 function printHour(dia) {
     var mi_etiqueta_table = document.createElement("table");
+    mi_etiqueta_table.setAttribute("class","horario");
     var contador = 0;
-    
-var mi_etiqueta_caption = document.createElement("caption");
-        var diasCaption = document.createTextNode(dia);
-        mi_etiqueta_caption.appendChild(diasCaption);
-        mi_etiqueta_table.appendChild(mi_etiqueta_caption);
-        
+
+    var mi_etiqueta_caption = document.createElement("caption");
+    var diasCaption = document.createTextNode(dia);
+    mi_etiqueta_caption.appendChild(diasCaption);
+    mi_etiqueta_table.appendChild(mi_etiqueta_caption);
+
     for (var i = 0; i < 7; i++) {
         var mi_etiqueta_tr = document.createElement("tr");
         mi_etiqueta_table.appendChild(mi_etiqueta_tr);
         for (var e = 0; e < 1; e++) {
             var mi_etiqueta_td = document.createElement("td");
             mi_etiqueta_td.setAttribute('class', "pulsar");
-           var hora_string= hours(contador);
-           var horaAnterior = hour;
-           var minAnterior = min;
-           contador++;
-           var horaStringTermina = hours(contador);
-            var mi_texto = document.createTextNode(hora_string+"-"+horaStringTermina);
+            var hora_string = hours(contador);
+            var horaAnterior = hour;
+            var minAnterior = min;
+            contador++;
+            var horaStringTermina = hours(contador);
+            var mi_texto = document.createTextNode(hora_string + "-" + horaStringTermina);
+            mi_etiqueta_td.setAttribute('onclick', "selectHour(" + hour + "," + min + "," + horaAnterior + "," + minAnterior + ")");
             hour = horaAnterior;
             min = minAnterior;
             mi_etiqueta_td.appendChild(mi_texto);
-            
+
             mi_etiqueta_tr.appendChild(mi_etiqueta_td);
 
         }
 
     }
-
-    document.getElementById("conten").innerHTML = "";
+    if(hour !== 20){
+         document.getElementById("conten").innerHTML = "";   
+    }
     document.getElementById("conten").appendChild(mi_etiqueta_table);
 
 }
-function hours(i){
-   if(i!==0){
-        hour = hour+1;
-       min=min+55;
-       if(min>60){
-           min=min-60;
-       }
-   }
-    if(i===4){
-        hour = 11;
-       min = 45;
-   }
-   var hora_string;
-  return  hora_string = hour+":"+min;
+function hours(i) {
+    if (i !== 0) {
+        hour = hour + 1;
+        min = min + 55;
+        if (min > 60) {
+            min = min - 60;
+        }
+    }
+    if (i === 4) {
+        if (hour === 12) {
+            hour = 11;
+            min = 45;
+        } else {
+            hour = 18;
+            min = 45;
+        }
+    }
+    var hora_string;
+    return  hora_string = hour + ":" + min;
 }
