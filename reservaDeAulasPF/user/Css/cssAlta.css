@@ -32,15 +32,15 @@ td{
 
 /*---------------------------------------------------------------------------------------------------------------*/
 
-#button{
-    border:solid 1px;
-    width: 25px;
-    height: 23px;
-    float:right;
-    cursor:pointer;
-}
 #box{
+    
     width: 250px;
     height: 250px;
-    background: #DFDFDF;
+    background: black;
+}
+#conten{
+    
+}
+#form{
+    display: block;
 }

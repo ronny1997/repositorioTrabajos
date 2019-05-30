@@ -6,16 +6,19 @@
 var mes_actual;
 var hour = 8;
 var min = 30;
+var responses;
 
 var houIniSegundoTurno = 15;
 var hourFinSegundoTurno = 30;
 
 var reserva;//objeto reserva
 window.onload = function () {
+    responce();
     var fecha_mes = new Date();
     var mes = fecha_mes.getMonth();
     imprimirMes(mes);
     mes_actual = mes;
+      $("#form").slideUp();
 
 
 };
@@ -83,7 +86,16 @@ function selectHour(horaTer, minTer, hourIni, minIni) {
     alert(hourIni + ":" + minIni + ", " + horaTer + ":" + minTer);
 
        
-            $("#box").slideToggle();
+            $("#conten").slideToggle();
+            $("#form").slideToggle();
+        //montar objeto 
+         //name
+    //fecha
+    // hora ini
+    //Hora fin
+    //descripcio
+    // id elemento
+            
         
 
 }
@@ -130,16 +142,72 @@ function numMes(mes) {
     return MesIs;
 }
 
-//$(document).ready(function () {
-//    $("#button").click(function () {
-//        if ($(this).html() == "-") {
-//            $(this).html("+");
-//        } else {
-//            $(this).html("-");
-//        }
-//        $("#box").slideToggle();
-//    });
-//});
+function submit(){
+    //name
+    //fecha
+    // hora ini
+    //Hora fin
+    //descripcio
+    // id elemento
+    
+}
 
+function responce() {
+    var parametro = {
+        "data": "getData"
+    };
+    $.ajax({
+        data: parametro, //datos que se envian a traves de ajax
+        url: '../php/phpBDD.php', //archivo que recibe la peticion
+        type: 'GET', //método de envio
+        //dataType: "json",
+        beforeSend: function () {
+            $("#res_au_tabla_reserv").html('<h1>Cargando...</h1>');
+        },
+        success: function (responces) {
+             responses = JSON.parse(responces);   
+            crearTabla("res_au_tabla_reserv", "ssdssd", "Elements");
+        }
+    });
+}
+function crearTabla(idTablaconte, idTabla, caption) {
+   // hacer una llamada para optener todos los ids reservados para una cierta hora
+    document.getElementById(idTablaconte).innerHTML = "";
+    var mi_etiqueta_table = document.createElement("table");
+     mi_etiqueta_table.setAttribute("id","idTabla");
+    document.getElementById(idTablaconte).appendChild(mi_etiqueta_table);
+    captio = document.createElement("caption");
+    var Caption = document.createTextNode(caption);
+    captio.appendChild(Caption);
+    mi_etiqueta_table.appendChild(captio);
+    
+    var mi_etiqueta_tr = document.createElement("tr");
 
+    for (var nameAtribute in  responses[0]) {
+        var campo = document.createTextNode(nameAtribute);
+        var mi_etiqueta_th = document.createElement("th");
+        mi_etiqueta_th.appendChild(campo);
+        mi_etiqueta_tr.appendChild(mi_etiqueta_th);
+    }
+    mi_etiqueta_table.appendChild(mi_etiqueta_tr);
+    
+    for (var dentro in responses) {
+        var mi_etiqueta_tr = document.createElement("tr");
+        mi_etiqueta_tr.setAttribute("class","pulsar");
+        for (var den in  responses[dentro]) {
+            var data = document.createTextNode(responses[dentro][den]);
+            var mi_etiqueta_td = document.createElement("td");
+            mi_etiqueta_td.appendChild(data);
+            mi_etiqueta_tr.appendChild(mi_etiqueta_td);
+        }
+        if("id"){
+            
+        }
+        mi_etiqueta_tr.setAttribute('onclick', 'funciona('+dentro+')');
+        mi_etiqueta_tr.appendChild(mi_etiqueta_td);
+        mi_etiqueta_table.appendChild(mi_etiqueta_tr);
+    }
+    // ---------------------ver si puedes hacer el metodo onclick en el TR preguntar al profesor si esta mal no usar punteros los escuchadores
+
+}
 

@@ -138,6 +138,7 @@ function crearTabla(idTablaconte, idTabla, caption) {
     // ____________________________________---------------------------------------ver si puedes hacer el metodo onclick en el TR preguntar al profesor si esta mal no usar punteros los escuchadores
 
 }
+
 function funciona(selec) {
     alert(response[selec]["id"]);
     id_select = selec;
