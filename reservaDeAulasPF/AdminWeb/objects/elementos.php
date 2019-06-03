@@ -15,7 +15,7 @@ class ElementBD {
         $this->bd = new conectaBD();
     }
 
-    public function insertElementBdd($name, $type, $description) {
+   public function insertElementBdd($name, $type, $description) {
         //protegerse de sql inyection
         $sql = 'INSERT INTO elementos ( name, type, description)'
                 . ' VALUES ("' . $name . '","' . $type . '","' . $description . '")';

@@ -7,6 +7,12 @@ var mes_actual;
 var hour = 8;
 var min = 30;
 var responses;
+var num_mes;
+var num_dia;
+
+var fechaReservaIni = new Date();
+var fechaReservaFin = new Date();
+var selecIndex;
 
 var houIniSegundoTurno = 15;
 var hourFinSegundoTurno = 30;
@@ -18,7 +24,7 @@ window.onload = function () {
     var mes = fecha_mes.getMonth();
     imprimirMes(mes);
     mes_actual = mes;
-      $("#form").slideUp();
+    $("#form").slideUp();
 
 
 };
@@ -70,11 +76,8 @@ function imprimirMes(mes) {
 }
 
 function selectMes(dia, mes) {
-    var num_mes = numMes(mes.id);
-    var fecha_seleccionada = new Date();
-    fecha_seleccionada.setMonth(num_mes);
-    fecha_seleccionada.setDate(dia);
-    fecha_seleccionada;
+    num_mes = numMes(mes.id);
+    num_dia = dia;
     printHour("Turno de mañanan " + dia + " de " + mes.id);
     hour = 15;
     min = 30;
@@ -85,18 +88,30 @@ function selectMes(dia, mes) {
 function selectHour(horaTer, minTer, hourIni, minIni) {
     alert(hourIni + ":" + minIni + ", " + horaTer + ":" + minTer);
 
-       
-            $("#conten").slideToggle();
-            $("#form").slideToggle();
-        //montar objeto 
-         //name
+    fechaReservaIni.setMonth(num_mes);
+    fechaReservaIni.setDate(num_dia);
+    fechaReservaIni.setHours(hourIni);
+    fechaReservaIni.setMinutes(minIni);
+
+    fechaReservaFin.setMonth(num_mes);
+    fechaReservaFin.setDate(num_dia);
+    fechaReservaFin.setHours(horaTer);
+    fechaReservaFin.setMinutes(minTer);
+
+
+
+
+    $("#conten").slideToggle();
+    $("#form").slideToggle();
+    //montar objeto 
+    //name
     //fecha
     // hora ini
     //Hora fin
     //descripcio
     // id elemento
-            
-        
+
+
 
 }
 
@@ -142,15 +157,6 @@ function numMes(mes) {
     return MesIs;
 }
 
-function submit(){
-    //name
-    //fecha
-    // hora ini
-    //Hora fin
-    //descripcio
-    // id elemento
-    
-}
 
 function responce() {
     var parametro = {
@@ -158,29 +164,29 @@ function responce() {
     };
     $.ajax({
         data: parametro, //datos que se envian a traves de ajax
-        url: '../php/phpBDD.php', //archivo que recibe la peticion
+        url: '../php/phpBDDReserva.php', //archivo que recibe la peticion
         type: 'GET', //método de envio
         //dataType: "json",
         beforeSend: function () {
             $("#res_au_tabla_reserv").html('<h1>Cargando...</h1>');
         },
         success: function (responces) {
-             responses = JSON.parse(responces);   
+            responses = JSON.parse(responces);
             crearTabla("res_au_tabla_reserv", "ssdssd", "Elements");
         }
     });
 }
 function crearTabla(idTablaconte, idTabla, caption) {
-   // hacer una llamada para optener todos los ids reservados para una cierta hora
+    // hacer una llamada para optener todos los ids reservados para una cierta hora
     document.getElementById(idTablaconte).innerHTML = "";
     var mi_etiqueta_table = document.createElement("table");
-     mi_etiqueta_table.setAttribute("id","idTabla");
+    mi_etiqueta_table.setAttribute("id", "idTabla");
     document.getElementById(idTablaconte).appendChild(mi_etiqueta_table);
     captio = document.createElement("caption");
     var Caption = document.createTextNode(caption);
     captio.appendChild(Caption);
     mi_etiqueta_table.appendChild(captio);
-    
+
     var mi_etiqueta_tr = document.createElement("tr");
 
     for (var nameAtribute in  responses[0]) {
@@ -190,20 +196,20 @@ function crearTabla(idTablaconte, idTabla, caption) {
         mi_etiqueta_tr.appendChild(mi_etiqueta_th);
     }
     mi_etiqueta_table.appendChild(mi_etiqueta_tr);
-    
+
     for (var dentro in responses) {
         var mi_etiqueta_tr = document.createElement("tr");
-        mi_etiqueta_tr.setAttribute("class","pulsar");
+        mi_etiqueta_tr.setAttribute("class", "pulsar");
         for (var den in  responses[dentro]) {
             var data = document.createTextNode(responses[dentro][den]);
             var mi_etiqueta_td = document.createElement("td");
             mi_etiqueta_td.appendChild(data);
             mi_etiqueta_tr.appendChild(mi_etiqueta_td);
         }
-        if("id"){
-            
+        if ("id") {
+
         }
-        mi_etiqueta_tr.setAttribute('onclick', 'funciona('+dentro+')');
+        mi_etiqueta_tr.setAttribute('onclick', 'funcionaReserva(' + dentro + ')');
         mi_etiqueta_tr.appendChild(mi_etiqueta_td);
         mi_etiqueta_table.appendChild(mi_etiqueta_tr);
     }
@@ -211,3 +217,41 @@ function crearTabla(idTablaconte, idTabla, caption) {
 
 }
 
+function funcionaReserva(num) {
+    selecIndex = num;
+    var info = document.getElementById("info_reserva");
+    var txt_info = document.createTextNode("Seleccionado: " + responses[num]["name"]);
+    alert(fechaReservaIni);
+    alert(fechaReservaFin);
+
+
+
+
+}
+function submit() {
+    var description = document.formAltaReserva.descripcion.value;
+    var elemento = {
+        id: responses[selecIndex]["id"],
+        nombreElemento: "prueba",
+        fechaReservaIni: fechaReservaIni,
+        fechaReservaFin: fechaReservaFin,
+        description: description
+    };
+    var elemenJson = JSON.stringify(elemento);
+    var parametro = {
+        "elemenJsonUpdateReserva": elemenJson
+    };
+    $.ajax({
+        data: parametro, //datos que se envian a traves de ajax
+        url: '../php/phpBDDReserva.php', //archivo que recibe la peticion
+        type: 'GET', //método de envio
+        //dataType: "json",
+        beforeSend: function () {
+            $("#finalReserv").html('<h1>Cargando...</h1>');
+        },
+        success: function (responces) {
+            $("#finalReserv").html(responces);
+        }
+    });
+
+}

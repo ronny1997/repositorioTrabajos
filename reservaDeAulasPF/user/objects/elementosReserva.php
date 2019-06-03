@@ -14,11 +14,10 @@ class ElementBD {
     public function __construct() {
         $this->bd = new conectaBD();
     }
-
-    public function insertElementBdd($name, $type, $description) {
+    public function insertElementBdd($idElement,$name, $fechaIni,$fechaFin,$description) {
         //protegerse de sql inyection
-        $sql = 'INSERT INTO elementos ( name, type, description)'
-                . ' VALUES ("' . $name . '","' . $type . '","' . $description . '")';
+        $sql = 'INSERT INTO reserva ( name, hour_ini, hour_fin, description, id_elementos)'
+                . ' VALUES ("' . $name . '","' . $fechaIni . '","' . $fechaFin . '","' . $description . '","' . $idElement . '")';
         $this->bd->insert($sql);
     }
 
@@ -28,6 +27,10 @@ class ElementBD {
         return $this->bd->select($sql);
     }
 
+    
+    
+    
+    //administrar mis reservas
     public function deleteElementBdd($id) {
         $sql = 'DELETE elemen, reserv FROM'
                 . ' elementos AS elemen INNER'
