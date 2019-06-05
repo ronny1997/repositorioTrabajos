@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+var fecha = new Date();
 function Calendario(mes, dia_mes_empiesa, num_dias) {
     this.c_mes = mes;
     this.c_dia_mes_empiesa = dia_mes_empiesa;
@@ -44,11 +44,24 @@ function Calendario(mes, dia_mes_empiesa, num_dias) {
                 if (contador2 >= this.c_dia_mes_empiesa) {
                     //USO UN CONTOR PARA PODER COGER UNO A UNO LOS ELEMENTOS DEL TD
                     if (dias_del_mes <= this.c_num_dias) {
-                        //asigno clase
-                        mi_etiqueta_td.setAttribute('class', "pulsar");
-                        //asigno onlick
+                        var diaActual = fecha.getDate();//ajustar
+                        var mesActual = getNameMounth(fecha.getMonth());
                         mes_asignado = "" + this.c_mes;
-                        mi_etiqueta_td.setAttribute('onclick', "selectMes(" + dias_del_mes + "," + mes_asignado + ")");
+                        if ( mes_asignado === mesActual) {
+                            if(dias_del_mes >= diaActual){
+                                //asigno clase
+                            mi_etiqueta_td.setAttribute('class', "pulsar");
+                            //asigno onlick
+                            mi_etiqueta_td.setAttribute('onclick', "selectMes(" + dias_del_mes + "," + mes_asignado + ")");
+                            }
+                        }else{
+                            //asigno clase
+                            mi_etiqueta_td.setAttribute('class', "pulsar");
+                            //asigno onlick
+                            mi_etiqueta_td.setAttribute('onclick', "selectMes(" + dias_del_mes + "," + mes_asignado + ")");
+                        }
+
+
                         var mi_texto = document.createTextNode(dias_del_mes);
                         mi_etiqueta_td.appendChild(mi_texto);
                     }
@@ -61,10 +74,15 @@ function Calendario(mes, dia_mes_empiesa, num_dias) {
         }
     }
 }
+function getNameMounth(intMes){
+    var arrayMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+     
+    return arrayMeses[intMes];
+}
 
 function printHour(dia) {
     var mi_etiqueta_table = document.createElement("table");
-    mi_etiqueta_table.setAttribute("class","horario");
+    mi_etiqueta_table.setAttribute("class", "horario");
     var contador = 0;
 
     var mi_etiqueta_caption = document.createElement("caption");
@@ -94,8 +112,8 @@ function printHour(dia) {
         }
 
     }
-    if(hour !== 20){
-         document.getElementById("conten").innerHTML = "";   
+    if (hour !== 20) {
+        document.getElementById("conten").innerHTML = "";
     }
     document.getElementById("conten").appendChild(mi_etiqueta_table);
 

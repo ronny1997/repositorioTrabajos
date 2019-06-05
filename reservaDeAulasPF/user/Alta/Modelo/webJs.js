@@ -9,6 +9,7 @@ var min = 30;
 var responses;
 var num_mes;
 var num_dia;
+var fecha = new Date();
 
 var fechaReservaIni = new Date();
 var fechaReservaFin = new Date();
@@ -17,9 +18,8 @@ var selecIndex;
 var houIniSegundoTurno = 15;
 var hourFinSegundoTurno = 30;
 
-var reserva;//objeto reserva
 window.onload = function () {
-    responce();
+    
     var fecha_mes = new Date();
     var mes = fecha_mes.getMonth();
     imprimirMes(mes);
@@ -29,13 +29,18 @@ window.onload = function () {
 
 };
 function menosMes() {
+     var mesActual = fecha.getMonth();
+     
+     if(mesActual < mes_actual){
     mes_actual--;
     imprimirMes(mes_actual);
+     }
 }
 function masMes() {
     mes_actual++;
     imprimirMes(mes_actual);
 }
+
 //Colocar esto, dentro del funcionamiento interno del objeto calendario
 function imprimirMes(mes) {
     var arrayMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
@@ -102,6 +107,7 @@ function selectHour(horaTer, minTer, hourIni, minIni) {
 
 
     $("#conten").slideToggle();
+    responce();
     $("#form").slideToggle();
     //montar objeto 
     //name
@@ -159,8 +165,13 @@ function numMes(mes) {
 
 
 function responce() {
+     var elemento = {
+        fechaReservaIni: fechaReservaIni,
+        fechaReservaFin: fechaReservaFin
+    };
+    var elemenJson = JSON.stringify(elemento);
     var parametro = {
-        "data": "getData"
+        "data": elemenJson
     };
     $.ajax({
         data: parametro, //datos que se envian a traves de ajax
@@ -171,6 +182,7 @@ function responce() {
             $("#res_au_tabla_reserv").html('<h1>Cargando...</h1>');
         },
         success: function (responces) {
+             //$("#res_au_tabla_reserv").html(responces);
             responses = JSON.parse(responces);
             crearTabla("res_au_tabla_reserv", "ssdssd", "Elements");
         }
@@ -221,6 +233,7 @@ function funcionaReserva(num) {
     selecIndex = num;
     var info = document.getElementById("info_reserva");
     var txt_info = document.createTextNode("Seleccionado: " + responses[num]["name"]);
+    info.appendChild(txt_info);
     alert(fechaReservaIni);
     alert(fechaReservaFin);
 
@@ -230,6 +243,12 @@ function funcionaReserva(num) {
 }
 function submit() {
     var description = document.formAltaReserva.descripcion.value;
+//    fechaReservaIni.setHours(fechaReservaIni.getHours()-fechaReservaIni.getTimezoneOffset()/60);
+//    fechaReservaIni.setMinutes(fechaReservaIni.getMinutes()-fechaReservaIni.getTimezoneOffset()/60);
+//    
+//    
+//    fechaReservaFin.setHours(fechaReservaFin.getHours()-fechaReservaFin.getTimezoneOffset()/60);
+//    fechaReservaFin.setMinutes(fechaReservaFin.getMinutes()-fechaReservaFin.getTimezoneOffset()/60);
     var elemento = {
         id: responses[selecIndex]["id"],
         nombreElemento: "prueba",

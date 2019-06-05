@@ -7,16 +7,26 @@
  */
 include_once '../objects/elementosReserva.php';
 
-if(isset($_GET['data'])){
+if (isset($_GET['data'])) {
+    $elemenJson = $_GET['data'];
+    $element = json_decode($elemenJson);
+    
+    $fechaIni = date("Y-m-d H:i", strtotime($element->fechaReservaIni));
+    $fechaFin = date("Y-m-d H:i", strtotime($element->fechaReservaFin));
+    
     $elemento = new ElementBD();
-    $arrayElement = $elemento ->datasElementBdd();
+    $arrayElement = $elemento->datasElementBddR($fechaIni,$fechaFin);
+    //print_r($arrayElement);
     echo json_encode($arrayElement, JSON_OBJECT_AS_ARRAY);
-   
 }
-if(isset($_GET['elemenJsonInsert'])){
-$elemenJson = $_GET['elemenJsonInsert'];
-$element = json_decode($elemenJson);
-$elemento = new ElementBD();
-$elemento->insertElementBdd($element->id,$element->nombreElemento,$element->fechaReservaIni,$element->fechaReservaFin,$element->description); 
+if (isset($_GET['elemenJsonUpdateReserva'])) {
+    $elemenJson = $_GET['elemenJsonUpdateReserva'];
+    $element = json_decode($elemenJson);
+
+    $fechaIni = date("Y-m-d H:i", strtotime($element->fechaReservaIni));
+    $fechaFin = date("Y-m-d H:i", strtotime($element->fechaReservaFin));
+
+    $elemento = new ElementBD();
+    $elemento->insertElementBdd($element->id, $element->nombreElemento, $fechaIni, $fechaFin, $element->description);
 }
 
