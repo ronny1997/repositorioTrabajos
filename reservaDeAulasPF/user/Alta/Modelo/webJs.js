@@ -232,6 +232,7 @@ function crearTabla(idTablaconte, idTabla, caption) {
 function funcionaReserva(num) {
     selecIndex = num;
     var info = document.getElementById("info_reserva");
+    document.getElementById("info_reserva").innerHTML = "";
     var txt_info = document.createTextNode("Seleccionado: " + responses[num]["name"]);
     info.appendChild(txt_info);
     alert(fechaReservaIni);
@@ -240,6 +241,9 @@ function funcionaReserva(num) {
 
 
 
+}
+function openPage(url){
+    window.location.replace(url);
 }
 function submit() {
     var description = document.formAltaReserva.descripcion.value;
@@ -269,7 +273,9 @@ function submit() {
             $("#finalReserv").html('<h1>Cargando...</h1>');
         },
         success: function (responces) {
-            $("#finalReserv").html(responces);
+            var ruta = "'../index.html'";
+            $("#finalReserv").html('<h1>'+responces+'</h1><br> <button onclick="openPage('+ruta+')">Reservar</button>');
+            
         }
     });
 

@@ -9,18 +9,52 @@
 //PDO
 class conectaBD {
 
-    protected $db;
-
-    function __construct() {
-        $dsn = 'mysql:host=localhost;dbname=reserva_aulas;charset=utf8';
-        $usuario = 'root';
-        $pass = '';
+    private $db;
+     private $archivo;
+    private $contenido;
+    private $servidor;
+    private $usuario;
+    private $clave;
+    private $bd;
+   function __construct() {
+        $this->setArchivo("sitio.conf");
+        $this->setContenido(parse_ini_file($this->archivo, true));
+        $this->setServidor($this->contenido['servidor']);
+        $this->setUsuario($this->contenido['usuario_admin']);
+        $this->setClave($this->contenido['contrasenia_admin']);
+        $this->setBd($this->contenido['nombrebd']);
+          $dsn = 'mysql:host='.$this->servidor.';dbname='.$this->bd.';charset=utf8';
         try {
-            $this->db = new PDO($dsn, $usuario, $pass);
+            $this->db = new PDO($dsn, $this->usuario, $this->clave);
         } catch (PDOException $e) {
             die("¡Error!: " . $e->getMessage() . "<br/>");
         }
     }
+      
+    function setArchivo($archivo) {
+        $this->archivo = $archivo;
+    }
+
+    function setContenido($contenido) {
+        $this->contenido = $contenido;
+    }
+
+    function setServidor($servidor) {
+        $this->servidor = $servidor;
+    }
+
+    function setUsuario($usuario) {
+        $this->usuario = $usuario;
+    }
+
+    function setClave($clave) {
+        $this->clave = $clave;
+    }
+
+    function setBd($bd) {
+        $this->bd = $bd;
+    }
+  
 
     public function select($sql) {
         $filas = array();
